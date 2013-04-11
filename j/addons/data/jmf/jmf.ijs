@@ -55,6 +55,7 @@ NULLPTR=: <0
 3 : 0''
 if. IFUNIX do.
   lib=. >(UNAME-:'Darwin'){'libc.so.6 ';'libc.dylib '
+  if. UNAME-:'Cygwin' do. lib=.'cygwin1.dll ' end.
   api=. 1 : ('(''',lib,''',x) & cd')
   c_isatty=: ' isatty i i' api
   c_open=: 'open i *c i i' api
