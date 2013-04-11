@@ -1,0 +1,11 @@
+esum.txt
+hostdefs*
+jconsole
+make.txt
+netdefs*
+profile*
+*.jmf
+*.exe
+*.[oa]
+*.so
+TAGS
