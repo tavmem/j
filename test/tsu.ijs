@@ -9,7 +9,9 @@ testfiles=: 3 : 0   NB. y. is prefix - e.g., 'g' or 'gm' or 'gs'
 ddall    =: testfiles 'g'           NB. all
 ddgmbx   =: testfiles 'gmbx'        NB. map boxed arrays
 ddgsp    =: testfiles 'gsp'         NB. sparse arrays
+ddstk    =: testfiles 'gstack'      NB. stack
 ddg      =: ddall -. ddgmbx,ddgsp   NB. "ordinary"
+ddx      =: ddall -. ddstk          NB. w/o stack
 
 etx      =: 1 : 'x :: (<:@(13!:11)@i.@0: >@{ 9!:8@i.@0:)'
 ex       =: ". etx
