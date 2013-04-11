@@ -289,7 +289,7 @@ static C*modebuf(mode_t m){C c;static C b[11];I t=m;
  so struct stat is used (wrong, but seems to work)
 */
 
-#if SYS & SYS_LINUX
+#if (SYS & SYS_LINUX) && !SY_CYGWIN
 #define stat stat64
 #endif
 

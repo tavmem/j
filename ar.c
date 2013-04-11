@@ -22,10 +22,15 @@ static DF1(jtreduce);
 #define PARITYW         PARITY4
 #endif  
 
-#if SY_ALIGN
+#if SY_ALIGN || _MISALIGN_BYTEVECTOR
 #define VDONE(T,PAR)  \
  {I q=n/sizeof(T);T s,*y=(T*)x; DO(m, s=0; DO(q, s^=*y++;); PAR; *z++=b==pc;);}
 
+#if _MISALIGN_BYTEVECTOR
+static void vdone(I m,I n,B*x,B*z,B pc){B b,*u;
+ DO(m, b=0; DO(n, b^=*x++;); *z++=b==pc;);
+}
+#else
 static void vdone(I m,I n,B*x,B*z,B pc){B b,*u;
  if(1==m){UI s,*xi;
   s=0; b=0;
@@ -38,6 +43,7 @@ static void vdone(I m,I n,B*x,B*z,B pc){B b,*u;
  else  if(0==n%sizeof(US  ))VDONE(US,  PARITY2)
  else  DO(m, b=0; DO(n, b^=*x++;); *z++=b==pc;);
 }
+#endif
 #else
 static void vdone(I m,I n,B*x,B*z,B pc){B b;I q,r;UC*u;UI s,*y;
  q=n/SZI; r=n%SZI; y=(UI*)x;
@@ -129,7 +135,7 @@ REDUCEPFX(plusinsB,I,B,PLUS)
 #else
 AHDRR(plusinsB,I,B){I d,dw,i,p,q,r,r1,s;UC*tu;UI*v;
  if(c==n&&n<SZI)DO(m, s=0; DO(n, s+=*x++;); *z++=s;)
- else if(c==n){UI t;
+ else if((!_MISALIGN_BYTEVECTOR)&&(c==n)){UI t;
   p=n/SZI; q=p/255; r=p%255; r1=n%SZI; tu=(UC*)&t;
   for(i=0;i<m;++i){
    s=0; v=(UI*)x; 
