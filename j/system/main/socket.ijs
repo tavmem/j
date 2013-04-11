@@ -30,6 +30,15 @@ case. 'Linux' do.
   LIB=: c
   closesocketJ=: 'close i i' scdm
   ioctlsocketJ=: 'ioctl i i i *i' scdm
+case. 'Cygwin' do.
+  c=. 'cygwin1.dll'
+  ccdm=: 1 : ('(''"',c,'" '',x)&(15!:0)')
+  ncdm=: ccdm
+  scdm=: ccdm
+  wcdm=: 1 : ']'
+  LIB=: c
+  closesocketJ=: 'close i i' scdm
+  ioctlsocketJ=: 'ioctl i i i *i' scdm
 case. 'Darwin' do.
   c=. 'libc.dylib'
   ccdm=: 1 : ('(''"',c,'" '',x)&(15!:0)')

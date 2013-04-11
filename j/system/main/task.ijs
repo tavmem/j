@@ -269,6 +269,7 @@ NB.    launch 'http://jsoftware.com'      NB. web browser
 
 3 : 0''
 LAUNCH=: ('gnome-open';'open';'start') {::~ ('Linux';'Darwin')i.<UNAME
+if. UNAME-:'Cygwin' do. LAUNCH=:'gnome-open' end.
 if. 0=nc<'LAUNCH_j_'do.if. 0<#LAUNCH_j_ do.LAUNCH=: LAUNCH_j_ end.end.
 )
 launch=: 3 : 'shell LAUNCH,'' '',y'

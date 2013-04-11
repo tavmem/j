@@ -12,6 +12,7 @@ IFJ6=: 0
 IFWINE=: IFWIN > 0-:2!:5'_'   
 if. IFUNIX do.
   UNAME=: (2!:0 'uname')-.10{a.
+  if. UNAME-:'CYGWIN_NT-6.1-WOW64' do. UNAME=:'Cygwin' end.
 else.
   UNAME=: 'Win'
 end.
@@ -310,7 +311,7 @@ DLL_PATH=: a: -.~ <;._1 ':',llp,def_path
 find_dll=: 3 : 0
 DLL_PATH find_dll y
 :
-if. UNAME-:'Linux' do. ('find_dll decommitted') 13!:8 ] 24 end.  
+if. (UNAME-:'Linux')+.(UNAME-:'Cygwin') do. ('find_dll decommitted') 13!:8 ] 24 end.  
 if. -.IFUNIX do. y return. end.
 y=. ,y
 if. (UNAME-:'Darwin') do. ext=. '.dylib*' else. ext=. '.so*' end.
@@ -1825,7 +1826,7 @@ a=. (,&'=: ',sub @ (3 : j)) each y
 )
 xedit=: xedit_j_
 wcsize=: 3 : 0
-if. (-.IFGTK+.IFJHS) *. UNAME-:'Linux' do.
+if. (-.IFGTK+.IFJHS) *. ((UNAME-:'Linux')+.(UNAME-:'Cygwin')) do.
   |.@".@(-.&LF)@(2!:0) :: (Cwh_j_"_) '/bin/stty size 2>/dev/null'
 else.
   Cwh_j_
