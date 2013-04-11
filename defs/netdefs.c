@@ -124,7 +124,9 @@ main(){
 	printf ("AF_SNA=: %d\n",(int)AF_SNA);
 	printf ("AF_DECnet=: %d\n",(int)AF_DECnet);
 	printf ("AF_APPLETALK=: %d\n",(int)AF_APPLETALK);
+#ifndef __CYGWIN__
 	printf ("AF_IPX=: %d\n",(int)AF_IPX);
+#endif
 	printf ("AF_MAX=: %d\n",(int)AF_MAX);
 	printf ("PF_UNSPEC=: %d\n",(int)PF_UNSPEC);
 	printf ("PF_UNIX=: %d\n",(int)PF_UNIX);
@@ -132,7 +134,9 @@ main(){
 	printf ("PF_SNA=: %d\n",(int)PF_SNA);
 	printf ("PF_DECnet=: %d\n",(int)PF_DECnet);
 	printf ("PF_APPLETALK=: %d\n",(int)PF_APPLETALK);
+#ifndef __CYGWIN__
 	printf ("PF_IPX=: %d\n",(int)PF_IPX);
+#endif
 	printf ("PF_MAX=: %d\n",(int)PF_MAX);
 	puts("");
 	printf ("SOMAXCONN=: %d\n",(int)SOMAXCONN);
@@ -150,7 +154,7 @@ main(){
 	printf ("msg_iov_sz=: %d\n",(int)sizeof(((struct msghdr*)0)->msg_iov));
 	printf ("msg_iovlen_off=: %d\n",(int)offset(struct msghdr,msg_iovlen));
 	printf ("msg_iovlen_sz=: %d\n",(int)sizeof(((struct msghdr*)0)->msg_iovlen));
-#if defined(linux) || defined(Darwin)
+#if defined(linux) || defined(Darwin) || defined(__CYGWIN__)
 	printf ("msg_control_off=: %d\n",(int)offset(struct msghdr,msg_control));
 	printf ("msg_control_sz=: %d\n",(int)sizeof(((struct msghdr*)0)->msg_control));
 	printf ("msg_controllen_off=: %d\n",(int)offset(struct msghdr,msg_controllen));
