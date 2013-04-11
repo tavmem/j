@@ -4,7 +4,7 @@ make jconsole
 
 if [ -x jconsole ]
 then
-echo success: jconsole created in core
+echo success: jconsole created
 else
 echo failed: jconsole NOT created
 fi
