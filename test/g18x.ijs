@@ -57,7 +57,9 @@ pcheck=: 3 : 0
  li=: 4<:8|f                                   NB. locale info
  assert. i -: 0{"1 p                           NB. index
  assert. b +. li +. 0<1{"1 p                   NB. internal type
- assert. li <: (s e.<'**local**')+.32=1{"1 p   NB. search path of locales 
+ if. -.(<'B_L_D') e. 4!:1[0 do. 
+  assert. li <: (s e.<'**local**')+.32=1{"1 p  NB. search path of locales 
+ end.
  assert. 0<:f                                  NB. flag
  assert. b +. li +. (3{"1 p) e. _1,i.#4!:3 ''  NB. script index
  assert.      i e.~ next=. 4{"1 p              NB. next
@@ -66,7 +68,9 @@ pcheck=: 3 : 0
  assert. b +. h +.             i = (prev*-.h){next,0
 
  assert. b +. li +. -. a e. a:
- assert. b +. li +. s e. '**local**';18!:1 i.2
+ if. -.(<'B_L_D') e. 4!:1[0 do.
+  assert. b +. li +. s e. '**local**';18!:1 i.2
+ end.
  assert. (18!:1 i.2) e. s
  1
 )
@@ -99,6 +103,6 @@ pcheck 18!:31 ''
 18!:55 <'asdf'
 
 
-4!:55 ;:'a adv b f h i k li m p pcheck s sum t x y yy'
+4!:55 ;:'a adv b c d f h i k li m p pcheck s sum t x y yy'
 
 
