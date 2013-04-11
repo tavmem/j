@@ -111,6 +111,3 @@ f=: x&i.
 
 
 4!:55 ;:'f fedot fico fidot g h m ss x xx yy'
-
-
- 
