@@ -11,7 +11,7 @@ tsdll : tsdll.o
 
 .PHONY : check
 check  :
-	sed -e "s_(bin i: '/'){.bin_bin,'/j'_g" <~/core/j/bin/profile.ijs >~/core/profile.ijs
+	sed -e "s_(bin i: '/'){.bin_bin,'/j'_g" <~/j/j/bin/profile.ijs >~/j/profile.ijs
 	./jconsole 'test/tstBLD.ijs'
 
 .PHONY  : install

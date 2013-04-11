@@ -4,8 +4,8 @@ cd
 git clone git@github.com:tavmem/j.git
 cd j
 touch *.c
-bin/build_jconsole	(builds jconsole in ~/core, but does not install)
-bin/build_libj		(builds libj in ~/core, but does not install)
+bin/build_jconsole
+bin/build_libj
 bin/build_defs
 bin/build_tsdll
 make check		(runs test scripts)
