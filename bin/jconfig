@@ -4,14 +4,14 @@
 bits=32
 
 # readline 0 or 1 to enable jconsole line recall
-readline=0
-LIBREADLINE=""
+# readline=0
+# LIBREADLINE=""
 
 # readline should be enabled if possible
 
 # remove # from next 2 lines to enable readline
-# readline=1
-# LIBREADLINE=" -lreadline "
+readline=1
+LIBREADLINE=" -lreadline "
 
 # if link fails install readline or try one of next lines
 # LIBREADLINE=" -ledit -lncurses "
@@ -20,9 +20,13 @@ LIBREADLINE=""
 # be careful with changes after this line
 
 un=`uname`
+if [ $un = CYGWIN_NT-6.1-WOW64 ]
+then
+un=Cygwin
+fi
 lcun=$( echo "$un" | tr -s  '[:upper:]'  '[:lower:]' )
 
-if [ $un != Linux ] && [ $un != Darwin ]
+if [ $un != Linux ] && [ $un != Darwin ] && [ $un != Cygwin ]
 then
 echo jconfig: not Linux or Darwin - changes to jconfig and other files required
 exit 1
@@ -40,9 +44,20 @@ echo jconfig:  readline must be 0 or 1
 exit 1
 fi
 
-COMP=" -fPIC -O3 -fno-strict-aliasing -DNOASM "
+if [ $un != Cygwin ]
+then
+COMP=" -fPIC -O2 -fno-strict-aliasing -DNOASM -msse2 -mfpmath=sse -D_MISALIGN_BYTEVECTOR"
+# g331ins fails on assertion that:
+#  (space required to execute statement y) < 1.5*(space used by object represented by statement y) 
+# g300t (timing) fails sometimes
+# -O3 causes segmentation fault on gstack
+else
+COMP=" -O2 -fno-strict-aliasing -DNOASM "
+JCONLINK=" -msse2 -mfpmath=sse "
+LIBREADLINE=" $LIBREADLINE -Wl,--stack=8000000 "
+fi
 
-if [ $un == Linux ]
+if [ $un == Linux ] || [ $un == Cygwin ]
 then
 SOLINK="  -shared -W1,soname,libj.so -lm -ldl -o "
 SOSUFFIX=so
@@ -70,4 +85,4 @@ COMP="-DREADLINE $COMP "
 fi
 
 SOLINK=" $SOLINK $TARGET.$SOSUFFIX "
-export COMP SOLINK M32 LIBREADLINE
+export COMP SOLINK M32 LIBREADLINE JCONLINK

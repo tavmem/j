@@ -140,8 +140,7 @@ cat esum.txt
 
 if [ -x libj.$SOSUFFIX ]
 then
-cp libj.$SOSUFFIX  j/bin/.
-echo success: libj.$SOSUFFIX created and copied to j/bin
+echo success: libj.$SOSUFFIX created
 else
 echo failed: libj.$SOSUFFIX NOT created
 fi

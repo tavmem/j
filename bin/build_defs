@@ -21,6 +21,7 @@ rm -f defs/temp
 
 if [ -e defs/hostdefs.ijs ] && [ -e defs/netdefs.ijs ]
 then
+mkdir j/system/defs
 cp defs/hostdefs.ijs  j/system/defs/hostdefs_$lcun$suffix
 cp defs/netdefs.ijs    j/system/defs/netdefs_$lcun$suffix
 echo success: new netdefs and hostdefs copied to j/system/defs
