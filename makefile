@@ -4,7 +4,7 @@ libj : $(LIBJ_OBJS)
 	cc  $(LIBJ_OBJS) $(SOLINK)
 
 jconsole : jconsole.o jeload.o
-	cc  jconsole.o jeload.o $(M32) $(LIBREADLINE) $(JCONLINK) -ldl -o jconsole
+	cc  jconsole.o jeload.o $(M32) $(LIBREADLINE) $(JCONLINK) -ldl -L/usr/lib64/ -o jconsole
 
 tsdll : tsdll.o
 	cc tsdll.o $(SOLINK)
@@ -25,5 +25,5 @@ test   :
 .PHONY : clean
 clean  :
 	rm *.o *.jmf *.so jconsole esum.txt make.txt
-	rm defs/hostdefs.ijs defs/netdefs.ijs j/bin/jconsole j/bin/libj.so
-	rm j/system/defs/ -r
+	rm defs/hostdefs.ijs defs/netdefs.ijs
+	rm -rf j/system/defs/

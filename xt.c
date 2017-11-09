@@ -6,12 +6,15 @@
 #ifdef _WIN32
 #include <windows.h>
 #include <winbase.h>
+#else
+#include <unistd.h>
 #endif
 
 #include "j.h"
 
 #if !SY_WINCE && (SY_WIN32 || (SYS & SYS_LINUX)) && !SY_CYGWIN
 #include <time.h>
+#include <sys/time.h>
 #else
 #if (SY_GETTOD && !(SYS&SYS_IBMRS6000)) || SY_CYGWIN
 #include <sys/time.h>

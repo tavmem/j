@@ -9,6 +9,10 @@
 #define _isatty isatty
 #define _fileno fileno
 #endif
+#include "stdio.h"
+#include <unistd.h>
+#include <readline/readline.h>
+#include <readline/history.h>
 #include <signal.h>
 #include "j.h"
 #include "jeload.h"
@@ -21,7 +25,6 @@ static char input[30000];
 /* we call to get next input */
 #ifdef READLINE
 /* readlin.h */
-int   add_history(const char *);
 int   read_history(const char *);
 int   write_history(const char *);
 char* readline(const char *);

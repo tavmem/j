@@ -18,6 +18,7 @@
 #define ijx "11!:0'pc ijx closeok;xywh 0 0 300 200;cc e editijx rightmove bottommove ws_vscroll ws_hscroll;setfont e \"Courier New\" 12;setfocus e;pas 0 0;pgroup jijx;pshow;'[18!:4<'base'"
 
 #else
+ #include <unistd.h>
  #include <dlfcn.h>
  #define GETPROCADDRESS(h,p)	dlsym(h,p)
  #define _stdcall

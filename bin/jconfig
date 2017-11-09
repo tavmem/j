@@ -1,7 +1,7 @@
 # configuration for build shell scripts - edit to configure
 
 # bits 32 or 64
-bits=32
+bits=64
 
 # readline 0 or 1 to enable jconsole line recall
 # readline=0
@@ -57,9 +57,15 @@ JCONLINK=" -msse2 -mfpmath=sse "
 LIBREADLINE=" $LIBREADLINE -Wl,--stack=8000000 "
 fi
 
-if [ $un == Linux ] || [ $un == Cygwin ]
+if [ $un == Cygwin ]
 then
-SOLINK="  -shared -W1,soname,libj.so -lm -ldl -o "
+SOLINK="  -shared -Wl,soname,libj.so -lm -ldl -o "
+SOSUFFIX=so
+fi
+
+if [ $un == Linux ]
+then
+SOLINK=" -shared -lm -ldl -o "
 SOSUFFIX=so
 fi
 

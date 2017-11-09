@@ -5,6 +5,7 @@
 
 #include "j.h"
 #include "x.h"
+#include <wchar.h>
 
 // utf-8 to c2v - assumes valid utf-8 data and snk of right size
 static void mtow(UC* src, I srcn, US* snk){ US c,c1,c2;
@@ -147,7 +148,7 @@ R z; // u16 from u8
 }
 
 void jttoutf8x(J jt,C* f, I n, US* fw){I q;
-q=wtomsize(fw,wcslen(fw));
-wtom(fw,wcslen(fw),f);
+q=wtomsize(fw,wcslen((const int *)fw));
+wtom(fw,wcslen((const int *)fw),f);
 f[q]=0;
 }
