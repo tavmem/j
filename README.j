@@ -19,5 +19,10 @@ note: on 32-bit-P4/Gentoo
       on Cygwin
       4 tests always fail: g18x g410 gipht git   
       3 tests sometimes fail: g330t g530t g6x 
+
+      on 64-bit Fedora-26
+      g300t (timing) usually fails
+      g331  always fails
+      g530t (timing) always fails
    
 
